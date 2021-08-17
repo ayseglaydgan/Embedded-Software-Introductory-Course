@@ -36,6 +36,7 @@ void main() {
                                 7,  87, 250, 230,  99,   3, 100,  90};
 
   int max_value = 0;
+  int min_value = 0;
   /* Statistics and Printing Functions Go Here */
   print_array(test, SIZE);
   sort_array(test, SIZE);
@@ -43,7 +44,8 @@ void main() {
   print_array(test,SIZE);
   max_value = find_maximum(test,SIZE);
   printf("\nMax Value: %d\n", max_value);
-  
+  min_value = find_minimum(test,SIZE);
+  printf("\nMin Value: %d\n", min_value);
 
 }
 
@@ -75,7 +77,7 @@ void sort_array(unsigned char* arr, int size)
       }
       
     }
-    
+
     swap(&arr[min],&arr[i]);
   }
   
@@ -84,4 +86,9 @@ unsigned char find_maximum(unsigned char* arr, int size)
 {
   sort_array(arr, size);
   return arr[size-1];
+}
+unsigned char find_minimum(unsigned char* arr, int size)
+{
+  sort_array(arr, size);
+  return arr[0];
 }

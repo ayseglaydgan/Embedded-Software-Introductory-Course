@@ -13,6 +13,7 @@
  * @brief Declarations of functions which are written for Coursera Course Assignment Week1 
  *
  * Most of the functions doing some calculations on a dataset statistical aspects and rest of them prints the results.
+ * swap function is added by me to make it easy to sorting
  *
  * @author Aysegul Aydogan
  * @date 16.08.2021
@@ -21,7 +22,6 @@
 #ifndef __STATS_H__
 #define __STATS_H__
 
-void print_statistic();
 /**
  * @brief prints the statistics of an array including minimum, maximum, mean, and median
  *
@@ -29,8 +29,8 @@ void print_statistic();
  *
  * @return no return needed
  */
+void print_statistic();
 
-void print_array(unsigned char* arr, int size);
 /**
  * @brief prints the all elements in array
  *
@@ -38,8 +38,8 @@ void print_array(unsigned char* arr, int size);
  *
  * @return no return needed
  */
+void print_array(unsigned char* arr, int size);
 
-float find_median(unsigned char* arr, int size);
 /**
  * @brief firstly calls the sort_array function then finds the middle value of sorted array
  *
@@ -47,8 +47,8 @@ float find_median(unsigned char* arr, int size);
  *
  * @return median
  */
-
-float find_mean(unsigned char* arr, int size); 
+float find_median(unsigned char* arr, int size);
+ 
 /**
  * @brief finds the average of dataset
  *
@@ -56,7 +56,8 @@ float find_mean(unsigned char* arr, int size);
  *
  * @return mean
  */
-unsigned char find_maximum(unsigned char* arr, int size);
+float find_mean(unsigned char* arr, int size);
+
 /**
  * @brief calls sort_array funciton then 0th element of sorted array is max
  *
@@ -64,7 +65,8 @@ unsigned char find_maximum(unsigned char* arr, int size);
  *
  * @return maximum
  */
-int find_minimum(unsigned char* arr, int size);
+unsigned char find_maximum(unsigned char* arr, int size);
+
 /**
  * @brief calls sort_array funciton then sizeth element of sorted array is min
  *
@@ -72,9 +74,17 @@ int find_minimum(unsigned char* arr, int size);
  *
  * @return minimum
  */
+unsigned char find_minimum(unsigned char* arr, int size);
+
+/**
+ * @brief swaps the elements 
+ *
+ * @param unsigned char*a and unsigned char*b to swap between them
+ *
+ * @return no return needded.
+ */
 void swap(unsigned char* a, unsigned char* b);
 
-void sort_array(unsigned char* arr, int size);
 /**
  * @brief sorts the array from largest to smallest
  *
@@ -82,7 +92,7 @@ void sort_array(unsigned char* arr, int size);
  *
  * @return no return needded.
  */
-
+void sort_array(unsigned char* arr, int size);
 
 
 
