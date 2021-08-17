@@ -94,6 +94,4 @@ void swap(unsigned char* a, unsigned char* b);
  */
 void sort_array(unsigned char* arr, int size);
 
-
-
 #endif /* __STATS_H__ */
