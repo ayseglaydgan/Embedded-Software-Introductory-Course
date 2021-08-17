@@ -21,20 +21,69 @@
 #ifndef __STATS_H__
 #define __STATS_H__
 
-/* Add Your Declarations and Function Comments here */ 
-
+void print_statistic();
 /**
- * @brief <Add Brief Description of Function Here>
+ * @brief prints the statistics of an array including minimum, maximum, mean, and median
  *
- * <Add Extended Description Here>
+ * @param no input needed
  *
- * @param <Add InputName> <add description here>
- * @param <Add InputName> <add description here>
- * @param <Add InputName> <add description here>
- * @param <Add InputName> <add description here>
- *
- * @return <Add Return Informaiton here>
+ * @return no return needed
  */
+
+void print_array(unsigned char* arr, int size);
+/**
+ * @brief prints the all elements in array
+ *
+ * @param unsigned char* for achiving the array, and the size of array.
+ *
+ * @return no return needed
+ */
+
+float find_median(unsigned char* arr, int size);
+/**
+ * @brief firstly calls the sort_array function then finds the middle value of sorted array
+ *
+ * @param unsigned char* for achiving the array, and the size of array.
+ *
+ * @return median
+ */
+
+float find_mean(unsigned char* arr, int size); 
+/**
+ * @brief finds the average of dataset
+ *
+ * @param unsigned char* for achiving the array, and the size of array.
+ *
+ * @return mean
+ */
+unsigned char find_maximum(unsigned char* arr, int size);
+/**
+ * @brief calls sort_array funciton then 0th element of sorted array is max
+ *
+ * @param unsigned char* for achiving the array, and the size of array.
+ *
+ * @return maximum
+ */
+int find_minimum(unsigned char* arr, int size);
+/**
+ * @brief calls sort_array funciton then sizeth element of sorted array is min
+ *
+ * @param unsigned char* for achiving the array, and the size of array.
+ *
+ * @return minimum
+ */
+void swap(unsigned char* a, unsigned char* b);
+
+void sort_array(unsigned char* arr, int size);
+/**
+ * @brief sorts the array from largest to smallest
+ *
+ * @param unsigned char* for achiving the array, and the size of array.
+ *
+ * @return no return needded.
+ */
+
+
 
 
 #endif /* __STATS_H__ */
