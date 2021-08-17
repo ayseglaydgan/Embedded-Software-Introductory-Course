@@ -25,11 +25,11 @@
 /**
  * @brief prints the statistics of an array including minimum, maximum, mean, and median
  *
- * @param no input needed
+ * @param unsigned char* for achiving the array, and the size of array. Because this function calls all statistical functions in main
  *
  * @return no return needed
  */
-void print_statistic();
+void print_statistics(unsigned char* arr, int size);
 
 /**
  * @brief prints the all elements in array
