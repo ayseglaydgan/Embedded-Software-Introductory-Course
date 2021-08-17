@@ -75,6 +75,7 @@ void sort_array(unsigned char* arr, int size)
       }
       
     }
+    
     swap(&arr[min],&arr[i]);
   }
   
