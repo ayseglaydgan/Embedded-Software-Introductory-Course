@@ -85,7 +85,7 @@ unsigned char find_maximum(unsigned char* arr, int size)
 unsigned char find_minimum(unsigned char* arr, int size)
 {
   sort_array(arr, size);
-  return arr[0];
+  return arr[size - 1];
 }
 
 float find_mean(unsigned char* arr, int size)
