@@ -32,11 +32,13 @@ void main() {
                               200, 122, 150, 90,   92,  87, 177, 244,
                               201,   6,  12,  60,   8,   2,   5,  67,
                                 7,  87, 250, 230,  99,   3, 100,  90};
-
+  printf("Original Array : ");
   print_array(test, SIZE);
+  printf("\n");
   sort_array(test, SIZE);
-  printf("\nsorted***********\n");
+  printf("\nSorted Array : ");
   print_array(test,SIZE);
+  printf("\n");
   print_statistics(test,SIZE);
 
 }
@@ -69,7 +71,6 @@ void sort_array(unsigned char* arr, int size)
       }
       
     }
-
     swap(&arr[min],&arr[i]);
   }
   
@@ -78,7 +79,7 @@ void sort_array(unsigned char* arr, int size)
 unsigned char find_maximum(unsigned char* arr, int size)
 {
   sort_array(arr, size);
-  return arr[size-1];
+  return arr[0];
 }
 
 unsigned char find_minimum(unsigned char* arr, int size)
@@ -114,7 +115,6 @@ float find_median(unsigned char* arr, int size)
     int m = (size + 1) / 2;
     median = (float)arr[m];
   }
-  
   return median;
   
 }
