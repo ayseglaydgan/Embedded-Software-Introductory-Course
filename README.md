@@ -10,3 +10,5 @@ find_mean() -  Given an array of data and a length, returns the mean
 find_maximum() -  Given an array of data and a length, returns the maximum
 find_minimum() -  Given an array of data and a length, returns the minimum
 sort_array() - Given an array of data and a length, sorts the array from largest to smallest. 
+
+Additionally swap() function is added by me to make it easy sorting array.
