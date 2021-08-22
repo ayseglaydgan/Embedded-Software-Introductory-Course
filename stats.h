@@ -19,6 +19,7 @@
  * @date 17.08.2021
  *
  */
+//preprocessor directives
 #ifndef __STATS_H__
 #define __STATS_H__
 
@@ -94,5 +95,5 @@ void swap(unsigned char* a, unsigned char* b);
  */
 void sort_array(unsigned char* arr, int size);
 
-
+//preprocessor directives
 #endif /* __STATS_H__ */
