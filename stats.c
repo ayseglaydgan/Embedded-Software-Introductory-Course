@@ -94,7 +94,7 @@ float find_mean(unsigned char* arr, int size)
   float average = 0;
   for (int i = 0; i < size; i++)
   {
-    total += (float)arr[i];
+    total = total + (float)arr[i];
     
   }
   average = total / size;
