@@ -28,7 +28,7 @@ include sources.mk
 PLATFORM = #The PLATFORM keyword provided in the Makefile should be used to conditionally assign the appropriate compiler flags, linker flags, and architecture flags. The target platform must be provided at the command line with the make command to set the platform you are compiling for.
 
 # Architectures Specific Flags
-LINKER_FILE = 
+LINKER_FILE = msp432p401r.lds
 CPU = 
 ARCH = 
 SPECS = 
