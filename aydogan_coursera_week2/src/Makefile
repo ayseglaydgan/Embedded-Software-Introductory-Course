@@ -24,19 +24,42 @@
 include sources.mk
 
 # Platform Overrides
+LINKER_FILE = -T msp432p401r.lds
+CPU = cortext-m4
+ARCH = cpu=cortex-m4 \
+	   thumb \
+       arch=armv7e-m \
+       float-abi=hard \
+       fpu=fpv4-sp-d16 \
+       
+SPECS = nosys.specs
 
-PLATFORM = #The PLATFORM keyword provided in the Makefile should be used to conditionally assign the appropriate compiler flags, linker flags, and architecture flags. The target platform must be provided at the command line with the make command to set the platform you are compiling for.
+ifeq ($(PLATFORM), MSP432)
+	CC = arm-none-eabi-gcc
+	LD = arm-none-eabi-ld
+	LDFLAGS
+	OBJDUMP = arm-none-eabi-objdump
+	SIZE = arm-none-eabi-size
+else
+	CC = gcc
+	LD = ld
+	LDFLAGS
+	OBJDUMP = objdump
+	SIZE =size
+
+
+
 
 # Architectures Specific Flags
-LINKER_FILE = -T msp432p401r.lds
-CPU = 
-ARCH = 
-SPECS = 
+
+
 
 # Compiler Flags and Defines
-CC = 
-LD = 
+
+#linker flags 
 LDFLAGS = 
+#c programming flags for gcc
 CFLAGS = 
+#c preprocessor flags
 CPPFLAGs = 
 
