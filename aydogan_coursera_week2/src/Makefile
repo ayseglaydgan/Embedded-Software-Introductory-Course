@@ -37,13 +37,13 @@ SPECS = nosys.specs
 ifeq ($(PLATFORM), MSP432)
 	CC = arm-none-eabi-gcc
 	LD = arm-none-eabi-ld
-	LDFLAGS
+	LDFLAGS = -Wl,-Map=$(TARGET).map $(LINKER_FILE)
 	OBJDUMP = arm-none-eabi-objdump
 	SIZE = arm-none-eabi-size
 else
 	CC = gcc
 	LD = ld
-	LDFLAGS
+	LDFLAGS = -Wl,-Map=$(TARGET).map
 	OBJDUMP = objdump
 	SIZE =size
 
