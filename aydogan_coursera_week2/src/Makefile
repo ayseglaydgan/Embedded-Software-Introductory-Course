@@ -26,18 +26,17 @@ include sources.mk
 # Platform Overrides
 LINKER_FILE = -T msp432p401r.lds
 CPU = cortext-m4
-ARCH = cpu=cortex-m4 \
-	   thumb \
-       arch=armv7e-m \
-       float-abi=hard \
-       fpu=fpv4-sp-d16 \
+ARCH = thumb 
        
-SPECS = nosys.specs
+       
+
 
 ifeq ($(PLATFORM), MSP432)
 	CC = arm-none-eabi-gcc
 	LD = arm-none-eabi-ld
 	LDFLAGS = -Wl,-Map=$(TARGET).map $(LINKER_FILE)
+	SPECS = nosys.specs
+	ARMFLAGS = -mcpu=$(CPU) -m$(ARCH) -march=armv7e-m -mfloat-abi=hard -mfpu=$(FPU)
 	OBJDUMP = arm-none-eabi-objdump
 	SIZE = arm-none-eabi-size
 else
@@ -47,19 +46,52 @@ else
 	OBJDUMP = objdump
 	SIZE =size
 
+endif
+
+TARGET = c1m2
+
+CFLAGS = -Wall -Werror -g -O0 -std=c99 -D$(PLATFORM) $(ARMFLAGS) 
+CPPFLAGS = -E
+MAIN = main
+
+OBJS = $(SOURCES:.c=.o)
+
+PREPRO = $(SOURCES:.c=.i)
+
+ASMS = $(SOURCES:.c=.asm)
+
+DEPS = $(SOURCES:.c=.d)
+ 
+FILES = *.asm *.i *.o *.d
+
+%.o : %.c
+	$(CC) $(INCLUDES) -c $< $(CFLAGS) -o $@
+
+%.i : %.c
+	$(CC) $(INCLUDES) $(CPPFLAGS) $< $(CFLAGS) -o $@
+
+%.asm : %.c
+	$(CC) $(INCLUDES) -S $< $(CFLAGS) -o $@
+
+$(TARGET).asm : $(TARGET).out
+	$(OBJDUMP) -d $(TARGET).out >> $@
+
+%.d : %.c
+	$(CC) $(INCLUDES) -M $< $(CFLAGS) -o $@
+
+.PHONY: compile-all
+compile-all: $(OBJS)
+	$(CC) $(INCLUDES) $(OBJS) -c $(CFLAGS) -o $(TARGET).o
+
+.PHONY: build
+build: $(TARGET).out  $(TARGET).asm
 
 
-
-# Architectures Specific Flags
-
-
-
-# Compiler Flags and Defines
-
-#linker flags 
-LDFLAGS = 
-#c programming flags for gcc
-CFLAGS = 
-#c preprocessor flags
-CPPFLAGs = 
+$(TARGET).out: $(OBJS) $(DEPS) 
+	$(CC) $(CFLAGS) $(INCLUDES) $(LDFLAGS) -o $@ $(OBJS)
+	$(SIZE) -Atd $(TARGET).out
+	$(SIZE) $(TARGET).out
+.PHONY: clean
+clean:
+	rm -f $(TARGET).asm $(FILES) $(TARGET).out $(TARGET).map $(PREPRO) $(ASMS) $(DEPS) $(OBJS)
 
