@@ -25,17 +25,15 @@ include sources.mk
 
 # Platform Overrides
 LINKER_FILE = -T msp432p401r.lds
-CPU = cortext-m4
+CPU = cortex-m4
 ARCH = thumb 
        
-       
-
-
 ifeq ($(PLATFORM), MSP432)
 	CC = arm-none-eabi-gcc
 	LD = arm-none-eabi-ld
 	LDFLAGS = -Wl,-Map=$(TARGET).map $(LINKER_FILE)
 	SPECS = nosys.specs
+	FPU = fpv4-sp-d16
 	ARMFLAGS = -mcpu=$(CPU) -m$(ARCH) -march=armv7e-m -mfloat-abi=hard -mfpu=$(FPU)
 	OBJDUMP = arm-none-eabi-objdump
 	SIZE = arm-none-eabi-size
