@@ -26,29 +26,39 @@ include sources.mk
 # Platform Overrides
 LINKER_FILE = -T msp432p401r.lds
 CPU = cortex-m4
+#thumb is an instruction set 
 ARCH = thumb 
        
 ifeq ($(PLATFORM), MSP432)
+#compile on target system
 	CC = arm-none-eabi-gcc
 	LD = arm-none-eabi-ld
+#Linker file has to be added here because in target system we link according to the given linker file
 	LDFLAGS = -Wl,-Map=$(TARGET).map $(LINKER_FILE)
 	SPECS = nosys.specs
-	FPU = fpv4-sp-d16
-	ARMFLAGS = -mcpu=$(CPU) -m$(ARCH) -march=armv7e-m -mfloat-abi=hard -mfpu=$(FPU)
+	ARMFLAGS = -mcpu=cortex-m4 \
+			   -mthumb \
+               -march=armv7e-m \
+               -mfloat-abi=hard \
+               -mfpu=fpv4-sp-d16 
 	OBJDUMP = arm-none-eabi-objdump
 	SIZE = arm-none-eabi-size
+	CFLAGS = -Wall -Werror -g -O0 -std=c99 -DMSP432 --specs=$(SPECS) $(ARMFLAGS)
+	
 else
 	CC = gcc
 	LD = ld
+#we dont have to add linker file because in this block our code is arch-independent so linker file can be automatic
 	LDFLAGS = -Wl,-Map=$(TARGET).map
 	OBJDUMP = objdump
 	SIZE =size
+	CFLAGS = -Wall -Werror -g -O0 -std=c99 -DHOST
 
 endif
 
 TARGET = c1m2
 
-CFLAGS = -Wall -Werror -g -O0 -std=c99 -D$(PLATFORM) $(ARMFLAGS) 
+ 
 CPPFLAGS = -E
 MAIN = main
 
@@ -83,12 +93,11 @@ compile-all: $(OBJS)
 
 .PHONY: build
 build: $(TARGET).out  $(TARGET).asm
-
-
 $(TARGET).out: $(OBJS) $(DEPS) 
 	$(CC) $(CFLAGS) $(INCLUDES) $(LDFLAGS) -o $@ $(OBJS)
 	$(SIZE) -Atd $(TARGET).out
 	$(SIZE) $(TARGET).out
+
 .PHONY: clean
 clean:
 	rm -f $(TARGET).asm $(FILES) $(TARGET).out $(TARGET).map $(PREPRO) $(ASMS) $(DEPS) $(OBJS)
