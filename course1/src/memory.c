@@ -64,3 +64,10 @@ uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length)
 	free(temp);
 	return dst;
 }
+
+uint8_t* my_memcopy(uint8_t* src, uint8_t* dst, size_t length){
+	for(size_t i = 0; i < length; ++i){
+		*(dst + i) = *(src + i);
+	}
+	return dst;
+}
