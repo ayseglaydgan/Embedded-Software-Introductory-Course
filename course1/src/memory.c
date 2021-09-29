@@ -71,3 +71,10 @@ uint8_t* my_memcopy(uint8_t* src, uint8_t* dst, size_t length){
 	}
 	return dst;
 }
+
+uint8_t* my_memset(uint8_t * src, size_t length, uint8_t value){
+	for(size_t i = 0; i < length; ++i){
+		*(src + i) = value;
+	}
+	return src;
+}
