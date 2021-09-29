@@ -21,6 +21,7 @@
  *
  */
 #include "memory.h"
+#include "stdint.h"
 
 /***********************************************************
  Function Definitions
@@ -48,3 +49,18 @@ void clear_all(char * ptr, unsigned int size){
   set_all(ptr, 0, size);
 }
 
+uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length)
+{
+	if(src == dst)
+		return dst;
+	uint8_t *temp = malloc(length * sizeof *temp);
+	for(uint8_t i = 0; i < length; ++i){
+		*(temp + i) = *(src + i);
+		*(src + i) = 0;
+	}
+	for(size_t i = 0; i < length; ++i){
+		*(dst + i) = *(temp + i);
+	}
+	free(temp);
+	return dst;
+}
