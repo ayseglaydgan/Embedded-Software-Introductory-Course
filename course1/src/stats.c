@@ -43,12 +43,13 @@ void main() {
 
 }
 
-void print_array(unsigned char* arr, int size)
-{
-  for (int i = 0; i < size; i++)
-  {
-    printf("%u ",arr[i]);
-  } 
+void print_array (unsigned int arrayLength, unsigned char *arrayElement) {
+  //It provides additional details as to what the computer is doing and what drivers and software it is loading during startup.
+  #ifdef VERBOSE
+    for(int i=0;i<arrayLength;i++){
+    	PRINTF("\tElement %d --> %d\n", i, (int)(*(arrayElement + i)));
+    }
+  #endif
 }
 void swap(unsigned char* a, unsigned char* b)
 {
